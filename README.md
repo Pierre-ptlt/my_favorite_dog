@@ -27,6 +27,12 @@ npm run dev
 
 Then open [http://localhost:5173](http://localhost:5173) in your browser.
 
+## Available Scripts
+
+- `npm run dev`: Starts the Vite development server
+- `npm run build` (optional): Creates a production-ready `dist` folder
+- `npm run preview` (optional): Serves the production build for preview
+
 ## Running Tests
 
 This project includes unit tests with [Vitest](https://vitest.dev/) and [React Testing Library](https://testing-library.com/).
@@ -36,6 +42,7 @@ To run the test suite:
 ```bash
 npm run test
 
+```
 
 ## Project Structure
 
@@ -47,4 +54,3 @@ npm run test
 ## Notes
 
 This project is set up with Vite, React, and TypeScript. No additional third-party dependencies are required.
-```
