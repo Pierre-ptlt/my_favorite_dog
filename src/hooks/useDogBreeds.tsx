@@ -1,24 +1,25 @@
-import { useState, useEffect, useTransition } from 'react';
-import { getBreeds } from '../api/dogApi';
+import { useState, useEffect } from 'react';
+import { getBreeds } from '../api/getBreeds';
 import { mapBreedsToLabel } from '../utils/mapBreedsToLabel';
 
-export function useDogBreeds() {
+export const useDogBreeds = () => {
   const [breeds, setBreeds] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [isPending, startTransition] = useTransition();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsLoading(true);
     getBreeds()
       .then(({ message }) => {
-        startTransition(() => {
-          const options = mapBreedsToLabel(message);
-          setBreeds(options);
-        });
+        setBreeds(mapBreedsToLabel(message));
       })
-      .catch((err) => {
+      .catch((err: Error) => {
         setError(err.message ?? 'Unknown error');
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
-  return { breeds, isLoading: isPending, error };
-}
+  return { breeds, isLoading, error };
+};
