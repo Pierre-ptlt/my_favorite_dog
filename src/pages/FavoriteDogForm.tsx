@@ -103,7 +103,7 @@ export const FavoriteDogForm: FC = () => {
           </p>
         )}
         <div className='buttons__group'>
-          <button type='button' onClick={handleReset}>
+          <button type='reset' onClick={handleReset}>
             Reset
           </button>
           <button type='submit' disabled={disabledSubmit || isSubmitting}>
