@@ -1,6 +1,6 @@
 import { FavoriteDogFormData } from '../types';
 
-export async function postSubmit(payload: FavoriteDogFormData): Promise<void> {
+export const postSubmit = async (payload: FavoriteDogFormData): Promise<void> => {
   const response = await fetch('/doesnotexist', {
     method: 'POST',
     headers: {

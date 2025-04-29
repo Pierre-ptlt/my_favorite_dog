@@ -50,7 +50,7 @@ export const FavoriteDogForm: FC = () => {
     setSubmitError(null);
   };
 
-  const handleSumbit = (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (disabledSubmit) return;
     const payload = {
@@ -65,7 +65,7 @@ export const FavoriteDogForm: FC = () => {
   return (
     <section>
       <h1>Vos préférences en matière de chien</h1>
-      <form onSubmit={handleSumbit}>
+      <form onSubmit={handleSubmit}>
         <div className='form__fields-group'>
           <InputText label='Nom' value={lastName} onChange={setLastName} />
           <InputText label='Prénom' value={firstName} onChange={setFirstName} />
@@ -73,7 +73,9 @@ export const FavoriteDogForm: FC = () => {
         {isLoading ? (
           <Loader type='breeds' />
         ) : breedsError ? (
-          <p className='error'>Erreur : {breedsError}</p>
+          <p className='error' role='alert'>
+            Erreur : {breedsError}
+          </p>
         ) : (
           <Dropdown
             label='Race de chien préférée'
@@ -95,7 +97,11 @@ export const FavoriteDogForm: FC = () => {
           checked={isChecked}
           onChange={() => setIsChecked(!isChecked)}
         />
-        {submitError && <p className='error'>Erreur : {submitError}</p>}
+        {submitError && (
+          <p className='error' role='alert'>
+            Erreur : {submitError}
+          </p>
+        )}
         <div className='buttons__group'>
           <button type='button' onClick={handleReset}>
             Reset

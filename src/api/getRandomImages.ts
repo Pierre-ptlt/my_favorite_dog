@@ -3,10 +3,10 @@ export type ImagesResponse = {
   status: string;
 };
 
-export async function getRandomImages(
+export  const getRandomImages = async (
   breedLabel: string,
   count: number
-): Promise<string[]> {
+): Promise<string[]> => {
   const parts = breedLabel.split(' ');
   const apiBreedPath = parts.length > 1 ? `${parts[1]}/${parts[0]}` : parts[0];
 
