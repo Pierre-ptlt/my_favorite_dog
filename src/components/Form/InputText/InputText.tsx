@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import styles from './InputText.module.css';
 
 interface InputTextProps {
   label: 'Nom' | 'Prénom';
@@ -6,15 +7,21 @@ interface InputTextProps {
   onChange: (val: string) => void;
 }
 
-export const InputText: FC<InputTextProps> = ({ label, value, onChange }) => (
-  <div className='form-group'>
-    <label htmlFor={label}>{label}</label>
-    <input
-      id={label}
-      type='text'
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      className='text-input'
-    />
-  </div>
-);
+export const InputText: FC<InputTextProps> = ({ label, value, onChange }) => {
+  const inputId = `input-${label.toLowerCase()}`;
+
+  return (
+    <div className={styles.container}>
+      <label htmlFor={inputId} className={styles.label}>
+        {label}
+      </label>
+      <input
+        id={inputId}
+        type='text'
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className={styles.input}
+      />
+    </div>
+  );
+};

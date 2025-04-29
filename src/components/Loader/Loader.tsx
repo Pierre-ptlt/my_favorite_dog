@@ -1,15 +1,19 @@
 import { FC } from 'react';
+import styles from './Loader.module.css';
 
 export type TLoader = {
-  type: 'breeds' | 'images';
+  type: 'chiens' | 'races';
 };
 
 export const Loader: FC<TLoader> = ({ type }) => {
   return (
-    <p>
-      {type === 'breeds'
-        ? 'Chargement des races...'
-        : 'Chargement des chiens...'}
+    <p
+      className={styles.loader}
+      role='status'
+      aria-busy='true'
+      aria-live='polite'
+    >
+      Chargement des {type}...
     </p>
   );
 };

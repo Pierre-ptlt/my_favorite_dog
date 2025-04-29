@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { getBreeds } from '../api/getBreeds';
 import { mapBreedsToLabel } from '../utils/mapBreedsToLabel';
 
-export const useDogBreeds = () => {
+export const useGetDogBreeds = () => {
   const [breeds, setBreeds] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);

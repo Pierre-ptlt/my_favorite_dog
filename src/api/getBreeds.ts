@@ -5,7 +5,7 @@ export type BreedsResponse = {
   status: string;
 };
 
-export async function getBreeds(): Promise<BreedsResponse> {
+export const getBreeds = async (): Promise<BreedsResponse> => {
   const res = await fetch('https://dog.ceo/api/breeds/list/all');
   if (!res.ok) {
     throw new Error(`Failed to fetch breeds: ${res.status}`);
@@ -13,4 +13,4 @@ export async function getBreeds(): Promise<BreedsResponse> {
   const data: BreedsResponse = await res.json();
 
   return data;
-}
+};
