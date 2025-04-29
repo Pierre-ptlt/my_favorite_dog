@@ -3,18 +3,32 @@ import { useDogBreeds } from '../hooks/useDogBreeds';
 import { InputText } from '../components/Form/InputText/InputText';
 import { Dropdown } from '../components/Form/Dropdown/Dropdown';
 import { Loader } from '../components/Loader/Loader';
+import { useRandomImages } from '../hooks/useRandomImages';
+import { ImagesWrapper } from '../components/DogGallery/ImageWrapper';
+import { Checkbox } from '../components/Form/Checkbox/Checkbox';
 
 export const FavoriteDogForm: FC = () => {
   const [lastName, setLastName] = useState<string>('');
   const [firstName, setFirstName] = useState<string>('');
   const [selectedBreed, setSelectedBreed] = useState<string>('');
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+
+  const numberOfImages = 5;
+
+  console.log(isChecked);
 
   const { breeds, isLoading, error } = useDogBreeds();
+  const {
+    images,
+    isLoading: imagesLoading,
+    error: imagesError,
+    loadImages
+  } = useRandomImages(numberOfImages);
 
-  console.log({
-    lastName,
-    firstName
-  });
+  const handleBreedChange = (breed: string) => {
+    setSelectedBreed(breed);
+    loadImages(breed);
+  };
 
   return (
     <section>
@@ -31,9 +45,22 @@ export const FavoriteDogForm: FC = () => {
             label='Race de chien préférée'
             options={breeds}
             value={selectedBreed}
-            onChange={setSelectedBreed}
+            onChange={handleBreedChange}
           />
         )}
+        {selectedBreed && (
+          <ImagesWrapper
+            images={images}
+            isLoading={imagesLoading}
+            error={imagesError}
+          />
+        )}
+
+        <Checkbox
+          breed={selectedBreed}
+          checked={isChecked}
+          onChange={() => setIsChecked(!isChecked)}
+        />
       </form>
     </section>
   );

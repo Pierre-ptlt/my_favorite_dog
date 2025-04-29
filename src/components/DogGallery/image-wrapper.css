@@ -1,0 +1,21 @@
+.image-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 16px 0;
+  padding: 0 20% 0 20%;
+}
+
+.image-wrapper .dog-image {
+  flex: 0 0 calc(50% - 8px);
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.image-wrapper .dog-image:nth-child(3) {
+  flex: 0 0 50%;
+  margin: auto;
+}

@@ -21,6 +21,7 @@ export const Dropdown: FC<DropdownProps> = ({
       onChange={(e) => onChange(e.target.value)}
       className='select-input'
     >
+      <option value=''>Sélectionnez une option</option>
       {options.map((opt) => (
         <option key={opt} value={opt}>
           {opt}
