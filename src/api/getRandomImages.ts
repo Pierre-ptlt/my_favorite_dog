@@ -3,12 +3,12 @@ export type ImagesResponse = {
   status: string;
 };
 
-export async function getRandomImages(
+export const getRandomImages = async (
   breedLabel: string,
   count: number
-): Promise<string[]> {
+): Promise<string[]> => {
   const parts = breedLabel.split(' ');
-  const apiBreedPath = parts.length > 1 ? `${parts[1]}/${parts[0]}` : parts[0];
+  const apiBreedPath = parts.length > 1 ? `${parts[1]}/${parts[0]}` : parts[0]; // Si le label contient deux mots (sous-race et race), on inverse pour obtenir "race/sous-race" pour l’API, sinon on prend la race seule
 
   const url = `https://dog.ceo/api/breed/${apiBreedPath}/images/random/${count}`;
   const res = await fetch(url);
@@ -17,4 +17,4 @@ export async function getRandomImages(
   }
   const data: ImagesResponse = await res.json();
   return data.message;
-}
+};

@@ -13,7 +13,7 @@ export const ImagesWrapper: FC<ImagesWrapperProps> = ({
   isLoading
 }) => {
   if (isLoading) {
-    return <Loader type='images' />;
+    return <Loader type='chiens' />;
   }
 
   return (

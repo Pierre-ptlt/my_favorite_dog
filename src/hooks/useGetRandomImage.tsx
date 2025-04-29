@@ -1,9 +1,8 @@
-// src/hooks/useRandomImages.ts
 import { useState } from 'react';
 import { sortImagesByName } from '../utils/sortImagesByName';
 import { getRandomImages } from '../api/getRandomImages';
 
-export function useRandomImages(numberOfImagesToDisplay: number) {
+export const useGetRandomImage = (numberOfImagesToDisplay: number) => {
   const [images, setImages] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -28,4 +27,4 @@ export function useRandomImages(numberOfImagesToDisplay: number) {
   };
 
   return { images, isLoading, error, loadImages };
-}
+};

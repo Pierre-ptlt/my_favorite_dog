@@ -1,6 +1,6 @@
 import { BreedsData } from '../types';
 
-export function mapBreedsToLabel(data: BreedsData): string[] {
+export const mapBreedsToLabel = (data: BreedsData): string[] => {
   const list: string[] = [];
   for (const [breed, subBreeds] of Object.entries(data)) {
     if (subBreeds.length === 0) {

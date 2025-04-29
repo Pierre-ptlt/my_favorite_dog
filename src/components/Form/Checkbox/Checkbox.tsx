@@ -1,4 +1,3 @@
-// src/components/Form/Checkbox.tsx
 import { FC } from 'react';
 
 export type CheckboxProps = {
@@ -11,7 +10,7 @@ export const Checkbox: FC<CheckboxProps> = ({ breed, checked, onChange }) => {
   if (!breed) return null;
 
   return (
-    <fieldset className='form-group checkbox-group'>
+    <fieldset className='checkbox-group'>
       <legend>Confirmation</legend>
       <label>
         <input
