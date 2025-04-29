@@ -6,15 +6,19 @@ interface InputTextProps {
   onChange: (val: string) => void;
 }
 
-export const InputText: FC<InputTextProps> = ({ label, value, onChange }) => (
-  <div className='form-field'>
-    <label htmlFor={label}>{label}</label>
-    <input
-      id={label}
-      type='text'
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      className='text-input'
-    />
-  </div>
-);
+export const InputText: FC<InputTextProps> = ({ label, value, onChange }) => {
+  const inputId = `input-${label.toLowerCase()}`;
+
+  return (
+    <div className='form-field'>
+      <label htmlFor={inputId}>{label}</label>
+      <input
+        id={inputId}
+        type='text'
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className='text-input'
+      />
+    </div>
+  );
+};
