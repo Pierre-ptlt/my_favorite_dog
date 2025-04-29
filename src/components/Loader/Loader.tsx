@@ -6,7 +6,7 @@ export type TLoader = {
 
 export const Loader: FC<TLoader> = ({ type }) => {
   return (
-    <p>
+    <p className='loader'>
       {type === 'breeds'
         ? 'Chargement des races...'
         : 'Chargement des chiens...'}

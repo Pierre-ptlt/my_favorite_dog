@@ -7,7 +7,7 @@ interface InputTextProps {
 }
 
 export const InputText: FC<InputTextProps> = ({ label, value, onChange }) => (
-  <div className='form-group'>
+  <div className='form-field'>
     <label htmlFor={label}>{label}</label>
     <input
       id={label}

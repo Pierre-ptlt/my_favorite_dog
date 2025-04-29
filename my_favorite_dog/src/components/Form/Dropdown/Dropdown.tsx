@@ -13,7 +13,7 @@ export const Dropdown: FC<DropdownProps> = ({
   value,
   onChange
 }) => (
-  <div className='form-group'>
+  <div className='form-field'>
     <label htmlFor={label}>{label}</label>
     <select
       id={label}
