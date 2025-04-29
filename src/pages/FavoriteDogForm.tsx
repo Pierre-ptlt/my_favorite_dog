@@ -1,4 +1,6 @@
-import { FC, useState } from 'react';
+import '../components/Form/form.css';
+
+import { FC, FormEvent, useState } from 'react';
 import { useDogBreeds } from '../hooks/useDogBreeds';
 import { InputText } from '../components/Form/InputText/InputText';
 import { Dropdown } from '../components/Form/Dropdown/Dropdown';
@@ -6,6 +8,7 @@ import { Loader } from '../components/Loader/Loader';
 import { useRandomImages } from '../hooks/useRandomImages';
 import { ImagesWrapper } from '../components/DogGallery/ImageWrapper';
 import { Checkbox } from '../components/Form/Checkbox/Checkbox';
+import { useSubmitForm } from '../hooks/useSubmitForm';
 
 export const FavoriteDogForm: FC = () => {
   const [lastName, setLastName] = useState<string>('');
@@ -15,31 +18,62 @@ export const FavoriteDogForm: FC = () => {
 
   const numberOfImages = 5;
 
-  console.log(isChecked);
+  const {
+    submitForm,
+    isSubmitting,
+    error: submitError,
+    setError: setSubmitError
+  } = useSubmitForm();
 
-  const { breeds, isLoading, error } = useDogBreeds();
+  const { breeds, isLoading, error: breedsError } = useDogBreeds();
   const {
     images,
-    isLoading: imagesLoading,
+    isLoading: isImagesLoading,
     error: imagesError,
     loadImages
   } = useRandomImages(numberOfImages);
+
+  const disabledSubmit =
+    !lastName || !firstName || !selectedBreed || !isChecked;
 
   const handleBreedChange = (breed: string) => {
     setSelectedBreed(breed);
     loadImages(breed);
   };
 
+  const handleReset = () => {
+    setLastName('');
+    setFirstName('');
+    setSelectedBreed('');
+    setIsChecked(false);
+    loadImages('');
+    setSubmitError(null);
+  };
+
+  const handleSumbit = (e: FormEvent) => {
+    e.preventDefault();
+    if (disabledSubmit) return;
+    const payload = {
+      lastName,
+      firstName,
+      breed: selectedBreed,
+      isChecked
+    };
+    submitForm(payload);
+  };
+
   return (
     <section>
       <h1>Vos préférences en matière de chien</h1>
-      <form>
-        <InputText label='Nom' value={lastName} onChange={setLastName} />
-        <InputText label='Prénom' value={firstName} onChange={setFirstName} />
+      <form onSubmit={handleSumbit}>
+        <div className='form__fields-group'>
+          <InputText label='Nom' value={lastName} onChange={setLastName} />
+          <InputText label='Prénom' value={firstName} onChange={setFirstName} />
+        </div>
         {isLoading ? (
           <Loader type='breeds' />
-        ) : error ? (
-          <p>Erreur : {error}</p>
+        ) : breedsError ? (
+          <p className='error'>Erreur : {breedsError}</p>
         ) : (
           <Dropdown
             label='Race de chien préférée'
@@ -51,7 +85,7 @@ export const FavoriteDogForm: FC = () => {
         {selectedBreed && (
           <ImagesWrapper
             images={images}
-            isLoading={imagesLoading}
+            isLoading={isImagesLoading}
             error={imagesError}
           />
         )}
@@ -61,6 +95,15 @@ export const FavoriteDogForm: FC = () => {
           checked={isChecked}
           onChange={() => setIsChecked(!isChecked)}
         />
+        {submitError && <p className='error'>Erreur : {submitError}</p>}
+        <div className='buttons__group'>
+          <button type='button' onClick={handleReset}>
+            Reset
+          </button>
+          <button type='submit' disabled={disabledSubmit || isSubmitting}>
+            {isSubmitting ? 'Envoi…' : 'Submit'}
+          </button>
+        </div>
       </form>
     </section>
   );
