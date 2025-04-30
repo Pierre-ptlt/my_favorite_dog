@@ -13,4 +13,4 @@ export const getBreeds = async (): Promise<BreedsResponse> => {
   const data: BreedsResponse = await res.json();
 
   return data;
-}
+};

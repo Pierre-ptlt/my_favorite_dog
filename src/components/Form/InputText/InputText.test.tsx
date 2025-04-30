@@ -27,6 +27,5 @@ describe('InputText', () => {
     const input = screen.getByLabelText('Nom');
     expect(input).toHaveAttribute('type', 'text');
     expect(input).toHaveAttribute('id', 'input-nom');
-    expect(input).toHaveClass('text-input');
   });
 });

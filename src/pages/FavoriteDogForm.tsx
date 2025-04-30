@@ -1,15 +1,15 @@
-import '../components/Form/form.css';
+import formStyles from './FavoriteDogForm.module.css';
 
 import { FC, FormEvent, useState } from 'react';
 import { InputText } from '../components/Form/InputText/InputText';
 import { Dropdown } from '../components/Form/Dropdown/Dropdown';
 import { Loader } from '../components/Loader/Loader';
-import { ImagesWrapper } from '../components/ImageWrapper/ImageWrapper';
 import { Checkbox } from '../components/Form/Checkbox/Checkbox';
 import { useGetDogBreeds } from '../hooks/useGetDogBreeds';
 import { useGetRandomImage } from '../hooks/useGetRandomImage';
 import { FavoriteDogFormData } from '../types';
 import { postSubmit } from '../api/postSubmit';
+import { ImagesWrapper } from '../components/ImageWrapper/ImagesWrapper';
 
 export const FavoriteDogForm: FC = () => {
   const [lastName, setLastName] = useState<string>('');
@@ -75,7 +75,7 @@ export const FavoriteDogForm: FC = () => {
     }
     if (breedsError) {
       return (
-        <p className='error' role='alert'>
+        <p className={formStyles.error} role='alert'>
           Erreur : {breedsError}
         </p>
       );
@@ -91,14 +91,14 @@ export const FavoriteDogForm: FC = () => {
   };
 
   return (
-    <section>
+    <section className={formStyles.wrapper}>
       <h1>Vos préférences en matière de chien</h1>
-      <form onSubmit={handleSubmit}>
-        <div className='form__fields-group'>
+      <form onSubmit={handleSubmit} className={formStyles.form}>
+        <div className={formStyles.fieldsGroup}>
           <InputText label='Nom' value={lastName} onChange={setLastName} />
           <InputText label='Prénom' value={firstName} onChange={setFirstName} />
         </div>
-        {renderDropdown()}
+        <div className={formStyles.fieldsGroup}>{renderDropdown()}</div>
         {selectedBreed && (
           <ImagesWrapper
             images={images}
@@ -113,15 +113,24 @@ export const FavoriteDogForm: FC = () => {
           onChange={() => setIsChecked(!isChecked)}
         />
         {submitError && (
-          <p className='error' role='alert'>
+          <p className={formStyles.error} role='alert'>
             Erreur : {submitError}
           </p>
         )}
-        <div className='buttons__group'>
-          <button type='reset' onClick={handleReset}>
+        <div className={formStyles.actionsGroup}>
+          <button
+            type='button'
+            onClick={handleReset}
+            className={formStyles.button}
+            disabled={isSubmitting}
+          >
             Reset
           </button>
-          <button type='submit' disabled={disabledSubmit || isSubmitting}>
+          <button
+            type='submit'
+            className={formStyles.button}
+            disabled={disabledSubmit || isSubmitting}
+          >
             {isSubmitting ? 'Envoi…' : 'Submit'}
           </button>
         </div>

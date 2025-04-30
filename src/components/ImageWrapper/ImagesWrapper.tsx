@@ -1,4 +1,4 @@
-import './image-wrapper.css';
+import styles from './ImagesWrapper.module.css';
 import { FC } from 'react';
 import { Loader } from '../Loader/Loader';
 
@@ -17,9 +17,9 @@ export const ImagesWrapper: FC<ImagesWrapperProps> = ({
   }
 
   return (
-    <div className='image-wrapper'>
+    <div className={styles.wrapper}>
       {images.map((url) => (
-        <img key={url} src={url} alt='Dog' className='dog-image' />
+        <img key={url} src={url} alt='Dog' className={styles.dogImage} />
       ))}
     </div>
   );

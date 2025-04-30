@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import styles from './Checkbox.module.css';
 
 export type CheckboxProps = {
   breed: string;
@@ -10,7 +11,7 @@ export const Checkbox: FC<CheckboxProps> = ({ breed, checked, onChange }) => {
   if (!breed) return null;
 
   return (
-    <fieldset className='checkbox-group'>
+    <fieldset className={styles.checkboxGroup}>
       <legend>Confirmation</legend>
       <label>
         <input

@@ -1,0 +1,62 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.form {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.fieldsGroup {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.fieldsGroup > * {
+  flex: 0 0 40%;
+}
+
+.actionsGroup {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.button {
+  padding: 0.75rem 1.5rem;
+  width: 30%;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.2s ease, background-color 0.2s;
+}
+
+.button:hover:not(:disabled) {
+  background-color: #0056b3;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background-color: #767778;
+}
+
+.error {
+  color: #d9534f;
+  font-size: 0.9rem;
+  margin-top: -0.5rem;
+}
